@@ -19,7 +19,7 @@ export class UsersService {
     return await newUser.save()
   }
 
-  async credentialsValidation(loginUserDto: AuthUserDto): Promise<object> {
+  async credentialsValidation(loginUserDto: AuthUserDto): Promise<{success: boolean, user: User}> {
     const { username, password } = loginUserDto
     const user = await this.getUserByUsername(username)
     const success = await compare(password, user.password)
